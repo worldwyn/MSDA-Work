@@ -1,0 +1,25 @@
+---
+title: "Week5Assignment"
+output: html_document
+---
+
+1.  When appending to create an object one sequentially adds elements via a loop so the size grows until the loop is concluded.  In preallocating, one specifies the number of elements or length of the object when it is defined.  Preallocating is more efficient as R knows how much memory will be needed at the outset, before the elements are added.
+
+```{r}
+# Append
+returns <- list()
+returns[[285]] <- 95
+# Preallocate
+returns <- list()
+returns <- vector(mode="list", length = length(returnnumbers))
+for i in returnnumber
+returns[[i]] <- quantity
+
+#Boston MASS data frame
+c <- crim
+t <- town
+n <- nox
+BostonDF <- data.frame(Town = t, Crime Rate = c, Nitrous Oxide Con = n)
+
+```
+
