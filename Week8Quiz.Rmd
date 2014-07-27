@@ -1,0 +1,86 @@
+---
+title: "Week8Quiz"
+author: "Joseph Ellinghaus"
+date: "July 27, 2014"
+output: html_document
+---
+
+Problem 1.  Add two numeric vectors
+```{r}
+
+##this first script will loop through the addition of each element in the two vectors, element by element
+a <- c(1:10)
+b <- c(11:20)
+c <- rep(NA, length(a))
+for (i in 1:10)
+{
+  c[i] <- a[i] + b[i]
+}
+print(a)
+print(b)
+print(c)
+##this second script accomplishes the addition in one pass on the whole vectors
+a2 <- c(1:10)
+b2 <- c(11:20)
+c2 <- rep(NA, length(a))
+c2 <- a2 + b2
+print(c2)
+##show that the results are the same
+c == c2
+```
+
+
+Problem 2 Coin Flips- while loop
+```{r}
+flips <- c("heads", "heads", "heads", "heads", "heads", "heads", "heads", "heads", "tails")
+
+i <- 0
+
+while (i < length(flips) & flips[i+1] == "heads")
+{
+  i <- i + 1
+}
+
+nheads <- i
+print("Number of Heads")
+print(nheads)
+
+flips <- c("heads", "heads", "heads", "heads", "heads", "heads", "heads", "heads")
+
+i <- 0
+
+while (i < length(flips) & flips[i+1] == "heads")
+{
+  i <- i + 1
+}
+
+nheads <- i
+print("Number of Heads")
+print(nheads)
+
+flips <- c("tails", "heads", "heads", "heads", "heads", "heads", "heads", "heads")
+
+i <- 0
+
+while (i < length(flips) & flips[i+1] == "heads")
+{
+  i <- i + 1
+}
+
+nheads <- i
+print("Number of Heads")
+print(nheads)
+```
+
+Problem 3 Add odd numbers from 1 to 100
+```{r}
+sum.odd <- 0
+for(j in 1:100)
+{
+  sum.odd <- sum.odd + (ifelse(j/2 == as.integer(j/2),0,j))
+#  print(j)
+#  print(sum.odd)
+}
+print('The sum is ')
+print(sum.odd)
+```

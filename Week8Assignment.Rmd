@@ -1,0 +1,93 @@
+---
+title: "Week8Assignment"
+author: "Joseph Ellinghaus"
+date: "July 27, 2014"
+output: html_document
+---
+
+My computer, a Macbook Pro with a 2.2GHz Intel Core i7 processor runs the simulations very quickly with 100 runs and 1,000 runs.  It is still reasonable, about 7 seconds, with 10,000 runs.  The estimate of probability that at least 7 heads or 7 tails in a row starts with a range of 0.5 to 0.54 at 100 runs.  It tightens to 0.52 to 0.535 at 1,000 runs, and is fairly consistant around 0.543 at 10,000 runs.
+
+
+```{r}
+success.count <- 0
+fail.count <- 0
+m <- 100
+runs <- m
+for(j in 1:m)
+{
+#set number of flips
+#print(j)
+n <- 100
+flip.vect <- vector(mode="numeric",length=1)
+for(i in 1:n)
+  {
+    flip.vect[i] <- rbinom(1,1,0.5)
+  }
+#flip.vect
+
+result <- "Failure"
+target <- flip.vect[1]
+count.heads <- 1
+count.tails <- 1
+max.heads <- 1
+max.tails <- 1
+#print(n)
+
+  for(i in 1:n)
+  {
+#print(i)
+#print(flip.vect[i])
+#print(flip.vect[i+1])
+  if(i == n)
+  {
+    break
+  } else
+  {
+    if(flip.vect[i + 1] == flip.vect[i])
+    {
+      if(flip.vect[i] == 1)
+      {
+        count.heads <- count.heads + 1
+        if(count.heads > max.heads)
+        {
+          max.heads <- count.heads
+        }
+        if(count.heads == 7)
+        {
+          result <- "Success"
+          break
+        }
+      } else
+      {
+        count.tails <- count.tails + 1
+        if(count.tails > max.tails)
+        {
+          max.tails <- count.tails
+        }
+        if(count.tails == 7)
+        {
+          result <- "Success"
+          break
+        }
+      }
+    } else
+      {
+        count.heads <- 1
+        count.tails <- 1
+      }
+  }
+  }
+  if(result == "Success")
+  {
+    success.count <- success.count +1
+  } else
+  {
+    fail.count <- fail.count +1
+  }
+#max.heads
+#max.tails
+}
+PHat <- success.count / m
+print(PHat)
+```
+
