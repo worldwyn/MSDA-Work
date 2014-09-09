@@ -1,5 +1,5 @@
 # 1. Queue problem.
-# Results:  Index for Patricia is 4.  Length of queue is 4.
+# Results:  Index for Patricia is 4.  Length of queue is 4. 
 
 queue <- c()
 print(queue)
