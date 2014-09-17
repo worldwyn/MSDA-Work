@@ -35,8 +35,8 @@ entropy <- function(myvector)
 }
 
 #test.vector <- c(rep(c("a"), 10),  rep(c("b"), 15))
-myentropy <- entropy(c(1, 0, 0, 1, 0, 0, 1, 1, 1))
-print(myentropy)
+#myentropy <- entropy(c(1, 0, 0, 1, 0, 0, 1, 1, 1))
+#print(myentropy)
 
 ## Infogain Function
 
@@ -68,8 +68,30 @@ decide <- function(data.frame, target.col)
 {
   df <- data.frame
   n.attr <- ncol(df) - 1
-  
+  max.infogain <- 0
+  infogains <- c()
+  for (i in 1:n.attr)
+  {
+    if ((i == target.col) & (i != n.attr))  # skip target column
+      {
+      i <- i + 1
+      }
+    infogain.df <- df[, (i,target.col)] # subset the dataframe incrementally to each attribute column and the target column
+    infogain[i] <- infogain(infogain.df, target.col, i) #  calculate the infogain for the ith attribute
+    if (infogain[i] > max.infogain)  # capture the maximum infogain value
+    {
+      max.infogain <- infogain[i]
+      max.attribute <- i  # identify the attribute with the maximum infogain
+      infogains <- c(infogains, infogain[i])  # build the list of infogains
+    }
+  }
+  return(c(i, infogains))  # return the column with the maxiumu infogain and the individual infogains for each attribute
 }
 
 
-entropy.dataframe <- as.dataframe(read.table (file = "entropy-test-file.csv", header = TRUE, sep = ",")
+entropy.dataframe <- as.dataframe(read.table (file = "entropy-test-file.csv", header = TRUE, sep = ","))
+results <- c()
+results <- decide(entropy.dataframe, "answer")
+cat("The attribute that produces the maximum infogain is ", results[1])
+cat("The infogains for the three attributes are ", results[2], results[3], results[4])
+
